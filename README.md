@@ -1,3 +1,3 @@
 # Simple-Text-Editor
 
-A simple java based text Editor
+A java based text editor made using the swing UI
