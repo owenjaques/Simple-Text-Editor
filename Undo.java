@@ -2,6 +2,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.Stack;
 
+//needs work on the undo for cut and paste
+
 public class Undo extends AbstractAction {
 	JTextArea textArea;
 	Stack<String> undoStack;
