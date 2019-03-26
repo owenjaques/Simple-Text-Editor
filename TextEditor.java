@@ -31,6 +31,7 @@ public class TextEditor {
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menuFile = new JMenu("File");
 		JMenu menuEdit = new JMenu("Edit");
+		JMenu menuFormat = new JMenu("Format");
 		
 		JMenuItem fileNew = new JMenuItem("New");
 		fileNew.addActionListener(new NewFile(textArea, window));
@@ -73,8 +74,20 @@ public class TextEditor {
 		menuEdit.add(editCopy);
 		menuEdit.add(editPaste);
 
+		JMenu formatFont = new JMenu("Fonts");
+		GraphicsEnvironment g = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		String [] fonts = g.getAvailableFontFamilyNames();
+		JList<String> fontList = new JList<String>(fonts);
+		JScrollPane pane = new JScrollPane(fontList);
+		pane.setSize(new Dimension(60, 80));
+		formatFont.add(pane);
+		fontList.addListSelectionListener(new Fonts(fontList, textArea));
+
+		menuFormat.add(formatFont);
+
 		menuBar.add(menuFile);
 		menuBar.add(menuEdit);
+		menuBar.add(menuFormat);
 
 		window.getContentPane().setPreferredSize(new Dimension(600, 400));
 		window.pack();
@@ -89,4 +102,5 @@ public class TextEditor {
 		Open tmp = new Open(textArea, window);
 		tmp.open();
 	}
+
 }
