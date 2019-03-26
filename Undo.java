@@ -2,8 +2,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.Stack;
 
-//needs work on the undo for cut and paste
-//looks like I need to make a seperate cut and paste objects
+//TODO implement undo functionality with cut and paste
 
 public class Undo extends AbstractAction {
 	JTextArea textArea;

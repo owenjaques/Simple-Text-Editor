@@ -2,7 +2,6 @@
  * Made by Owen Jaques
  * 2019/03/23
  * 
- * has a bit of iffy cut copy paste functionality with undo
  */
 
 import javax.swing.*;
@@ -15,10 +14,11 @@ import java.util.Stack;
 
 public class TextEditor {
 	public static File file = null;
+	public static int textSize = 14;
 
 	public static void main(String [] args){
 		JFrame window = new JFrame("new.txt - Simple Text Editor");
-		Font font = new Font("Calibri", Font.PLAIN, 14);
+		Font font = new Font("Calibri", Font.PLAIN, textSize);
 		ImageIcon icon = new ImageIcon("icon.png");//cat image
 		Stack<String> undoStack = new Stack<String>();
 
@@ -29,9 +29,8 @@ public class TextEditor {
 		textArea.setFont(font);
 
 		JMenuBar menuBar = new JMenuBar();
+		
 		JMenu menuFile = new JMenu("File");
-		JMenu menuEdit = new JMenu("Edit");
-		JMenu menuFormat = new JMenu("Format");
 		
 		JMenuItem fileNew = new JMenuItem("New");
 		fileNew.addActionListener(new NewFile(textArea, window));
@@ -57,6 +56,8 @@ public class TextEditor {
 		menuFile.add(fileSaveAs);
 		menuFile.add(fileExit);
 
+		JMenu menuEdit = new JMenu("Edit");
+
 		JMenuItem editUndo = new JMenuItem("Undo");
 		editUndo.addActionListener(new Undo(textArea, undoStack));
 		editUndo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK));
@@ -78,6 +79,8 @@ public class TextEditor {
 		menuEdit.add(editCopy);
 		menuEdit.add(editPaste);
 
+		JMenu menuFormat = new JMenu("Format");
+
 		JMenu formatFont = new JMenu("Fonts");
 		GraphicsEnvironment g = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		String [] fonts = g.getAvailableFontFamilyNames();
@@ -89,9 +92,27 @@ public class TextEditor {
 
 		menuFormat.add(formatFont);
 
+		JMenu menuView = new JMenu("View");
+		JMenu viewZoom = new JMenu("Zoom");
+
+		//TODO fix the accelerator
+		JMenuItem zoomIn = new JMenuItem("Zoom In");
+		zoomIn.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_EQUALS, KeyEvent.CTRL_DOWN_MASK + KeyEvent.SHIFT_DOWN_MASK));
+		zoomIn.addActionListener(new ZoomIn(textArea));
+
+		JMenuItem zoomOut = new JMenuItem("Zoom Out");
+		zoomOut.addActionListener(new ZoomOut(textArea));
+		zoomOut.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_MINUS, KeyEvent.CTRL_DOWN_MASK));
+
+		viewZoom.add(zoomIn);
+		viewZoom.add(zoomOut);
+
+		menuView.add(viewZoom);
+
 		menuBar.add(menuFile);
 		menuBar.add(menuEdit);
 		menuBar.add(menuFormat);
+		menuBar.add(menuView);
 
 		window.getContentPane().setPreferredSize(new Dimension(600, 400));
 		window.pack();
