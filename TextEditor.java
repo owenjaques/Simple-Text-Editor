@@ -48,10 +48,14 @@ public class TextEditor {
 		fileOpen.addActionListener(new Open(textArea, window));
 		fileOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK));
 
+		JMenuItem fileExit = new JMenuItem("Exit");
+		fileExit.addActionListener(new Exit());
+
 		menuFile.add(fileNew);
 		menuFile.add(fileOpen);
 		menuFile.add(fileSave);
 		menuFile.add(fileSaveAs);
+		menuFile.add(fileExit);
 
 		JMenuItem editUndo = new JMenuItem("Undo");
 		editUndo.addActionListener(new Undo(textArea, undoStack));
