@@ -13,6 +13,7 @@ import javax.swing.text.DefaultEditorKit;
 import java.util.Stack;
 
 public class TextEditor {
+	//TODO add getters setters for these two
 	public static File file = null;
 	public static int textSize = 14;
 
