@@ -1,6 +1,8 @@
 /*
  * Made by Owen Jaques
  * 2019/03/23
+ * 
+ * has a bit of iffy cut copy paste functionality with undo
  */
 
 import javax.swing.*;
@@ -55,7 +57,6 @@ public class TextEditor {
 		editUndo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK));
 
 		JMenuItem editCut = new JMenuItem("Cut");
-		//undoStack.push(textArea.getText() + " ");
 		editCut.addActionListener(new DefaultEditorKit.CutAction());
 		editCut.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, KeyEvent.CTRL_DOWN_MASK));
 
@@ -64,7 +65,6 @@ public class TextEditor {
 		editCopy.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_DOWN_MASK));
 
 		JMenuItem editPaste = new JMenuItem("Paste");
-		//undoStack.push(textArea.getText());
 		editPaste.addActionListener(new DefaultEditorKit.PasteAction());
 		editPaste.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_DOWN_MASK));
 
